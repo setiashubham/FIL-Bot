@@ -14,7 +14,10 @@ Tables=[{'QUALIFIED_TABLE_NAME' : "FINANCEDWH.FDWH.FINANCIALS",
 'TABLE_DESCRIPTION' : "This table is about Funds."},
 {'QUALIFIED_TABLE_NAME' : "FINANCEDWH.FDWH.REGION",
 'METADATA_QUERY' : "SELECT REGION_ID,REGION_NAME,COMMENTS FROM FINANCEDWH.FDWH.REGION;",
-'TABLE_DESCRIPTION' : "This table is about REGION."}
+'TABLE_DESCRIPTION' : "This table is about REGION."},
+{'QUALIFIED_TABLE_NAME' : "FINANCEDWH.FDWH.PROFITABILITY",
+'METADATA_QUERY' : "SELECT MANAGEMENT_FEES, ADMIN_FEES, THIRD_PARTY_FUND_REVENUE, ASSET_BASED_DISTRIBUTION_FEES, FUND_EXPENSE_WRITE_OFFS, TOTAL_ASSET_BASED_REVENUE, PERFORMANCE_FEES, OTHER_DISTRIBUTION_FEES, OTHER_REVENUE, TOTAL_REVENUE, STAFF_COSTS, BONUS_PSP, PROFESSIONAL_AND_OUTSOURCED_FEES, TRAVEL_AND_ENTERTAINMENT, OTHER_DIRECT_COSTS, MARKETING_COSTS, OTHER, ADVISORY_FEES, CENTRAL_ADJS, TOTAL_COSTS_AUG22_FX, FX_IMPACT, TOTAL_COSTS, PROFIT_LOSS, MARGIN, NET_EARNINGS, REPORTING_PERIOD FROM FINANCEDWH.FDWH.PROFITABILITY;",
+'TABLE_DESCRIPTION' : "This table is about PROFITABILITY of CFP data."}
 ]
 
 # 93 token --> 4100
@@ -35,6 +38,9 @@ def get_table_context(table_name: str, table_description: str, metadata_query: s
         WHERE TABLE_SCHEMA = '{table[1].upper()}' AND TABLE_NAME = '{table[2].upper()}'
         """,
     )
+    #st.text(type(columns))
+    #st.text(columns)
+    
     columns = "\n".join(
         [
             f"- **{columns['COLUMN_NAME'][i]}**: {columns['DATA_TYPE'][i]}"
@@ -52,7 +58,7 @@ Here are the columns of the {'.'.join(table)}
     """
     if metadata_query:
         metadata = conn.query(metadata_query)
-        #st.text(len(metadata))
+        #st.text(metadata)
         '''metadata = "\n".join(
             [
                 f"- **{metadata['REPORTING_PERIOD'][i]}**: {metadata['COMMENTS'][i]}"

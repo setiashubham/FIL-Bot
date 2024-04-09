@@ -1,7 +1,7 @@
 import openai
 import re
 import streamlit as st
-from prompts import get_system_prompt
+from prompts_latest import get_system_prompt
 from gpt_index import SimpleDirectoryReader, GPTSimpleVectorIndex, LLMPredictor, PromptHelper
 from langchain.chat_models import ChatOpenAI
 import streamlit as st
@@ -28,8 +28,6 @@ if nav == "Snowflake":
     # Prompt for user input and save
     if prompt := st.chat_input():
         st.session_state.messages.append({"role": "user", "content": prompt})
-        
-        
     # display the existing chat messages
     for message in st.session_state.messages:
         #st.text(message)
